@@ -1,9 +1,16 @@
 ////imports: dependencies, styles, components...
 //import backgroundImage from '../images/blackboard.jpg'
 import '../styles/index.scss'
+import {useState} from 'react';
 
 //////functions, variables, handles...
 function App() {
+  let [numberOfErrors, setNumberOfErrors] = useState(1);
+  let handleClick = (event) => { 
+    setNumberOfErrors(numberOfErrors + 1);
+    return(numberOfErrors);
+     console.log(numberOfErrors);
+  }
 
 ///html
   return (
@@ -51,7 +58,7 @@ function App() {
             />
           </form>
         </section>
-        <section className="dummy error-5">
+        <section className= {`dummy error-${numberOfErrors}`}>
           <span className="error-13 eye"></span>
           <span className="error-12 eye"></span>
           <span className="error-11 line"></span>
@@ -65,6 +72,7 @@ function App() {
           <span className="error-3 line"></span>
           <span className="error-2 line"></span>
           <span className="error-1 line"></span>
+          <button className= "numberOfErrors" onClick={handleClick}>Incrementar</button>
         </section>
       </main>
     </div>
@@ -73,3 +81,20 @@ function App() {
 }
 
 export default App
+
+/*AL CARGAR LA PAGINA
+  solucion = tiene valor (api - palabra aleatoria) pinta los huecos de las letras
+  letras solucion = huecos de la palabra aleatoria. no tiene valor
+  letras falladas = vacío
+  input letras = vacío
+  muñeco = vacío (lineas menor opacidad)
+
+  AL REALIZAR UN EVENTO
+  solucion = mismo valor
+  letras solucion = pinta las letras acertadas (quitar clase hidden)
+  letras falladas = añadir letras si no coinciden con el array de la solucion
+  input letras = pintar el valor del input en letras solucion, si está en el array de solucion, y si no está las pinta en falladas
+  muñeco = se le añade una linea si el input no esta en letras solucion (o si está en letras falladas)*/
+
+
+
