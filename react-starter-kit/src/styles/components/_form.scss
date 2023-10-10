@@ -13,6 +13,7 @@
     animation-duration: 2s;
     animation-iteration-count: infinite;
 
+
     &[maxLength='1'] {
       width: 5rem;
     }
@@ -21,10 +22,18 @@
       width: 25rem;
     }
 
+
+
     &::selection {
       background-color: rgba(255, 255, 255, 0.25);
     }
   }
+}
+
+.message-error{
+  width: 7rem; 
+  font-size: 2rem;
+  color: red;
 }
 
 @keyframes borderBottomInput {

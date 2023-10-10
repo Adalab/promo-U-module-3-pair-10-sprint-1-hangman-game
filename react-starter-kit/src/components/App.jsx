@@ -6,11 +6,25 @@ import {useState} from 'react';
 //////functions, variables, handles...
 function App() {
   let [numberOfErrors, setNumberOfErrors] = useState(1);
-  let handleClick = (event) => { 
-    setNumberOfErrors(numberOfErrors + 1);
+  let handleClick = () => { 
+    numberOfErrors >0 && numberOfErrors<= 13 ? setNumberOfErrors(numberOfErrors + 1) : console.log ('Perdiste'); 
+    console.log (numberOfErrors);
     return(numberOfErrors);
-     console.log(numberOfErrors);
   }
+  const [lastLetter, setLastLetter]= useState ('');
+
+  const handleChange =(event)=> {
+    const letter = event.target.value;
+    if(letter === event.target.value) {
+     setLastLetter(event.target.value.replace (/[^a-zA-Z\d]/ig, 'Error'));
+     if (letter === 'Error'){
+      lastLetter.classList.remove ('form__input')
+      lastLetter.classList.add ('message-error')
+     }
+
+    }
+  }
+
 
 ///html
   return (
@@ -55,6 +69,9 @@ function App() {
               type="text"
               name="last-letter"
               id="last-letter"
+              value={lastLetter}
+              onChange={handleChange}
+              pattern="[A-Za-z]"
             />
           </form>
         </section>
