@@ -14,14 +14,14 @@ function App() {
   const [lastLetter, setLastLetter]= useState ('');
   const [word, setWord]= useState ('katacrocker');
   const [userLetters, setUserLetters]= useState ([]);
-  const [solutionLetters, setSolutionLetters] = useState([]); 
+  //const [solutionLetters, setSolutionLetters] = useState([]); 
 
 
   const renderSolutionLetters =()=>{
     const wordLetters = word.split('');
     return wordLetters.map ((eachLetter,index)=>{
       if (userLetters.includes(eachLetter)){
-      setSolutionLetters ([...eachLetter])
+
       return <li className="letter" key={index}>{eachLetter}</li>
       } else {
         return <li className="letter" key={index}></li>; 
@@ -29,11 +29,24 @@ function App() {
     })
   }
 
+  const renderErrorLetters=(event)=>{
+    const value = event.target.value;
+    return(
+      //userLetters.filter((eachLetter)=>(!userLetters.includes(word)))
+      //nos quedamos aquí.
+      )
+    
+    
+
   const handleChange =(event)=> {
-    const letter = event.target.value;
+    let letter = event.target.value;
     if(letter === event.target.value) {
-     setLastLetter(event.target.value.replace (/[^a-zA-Z\d]/ig, '¿?'));
-     setSolutionLetters ([...solutionLetter])
+     setLastLetter(event.target.value.replace (/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/ig, '¿?'));
+     if (letter !== ""){
+     userLetters.push(event.target.value);
+     setUserLetters ([...userLetters]);
+     setLastLetter (letter);
+      }
     }
   }
 
