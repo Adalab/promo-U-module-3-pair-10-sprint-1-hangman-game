@@ -5,23 +5,35 @@ import {useState} from 'react';
 
 //////functions, variables, handles...
 function App() {
-  let [numberOfErrors, setNumberOfErrors] = useState(1);
-  let handleClick = () => { 
+  const [numberOfErrors, setNumberOfErrors] = useState(1);
+  const handleClick = () => { 
     numberOfErrors >0 && numberOfErrors<= 13 ? setNumberOfErrors(numberOfErrors + 1) : console.log ('Perdiste'); 
     console.log (numberOfErrors);
     return(numberOfErrors);
   }
   const [lastLetter, setLastLetter]= useState ('');
+  const [word, setWord]= useState ('katacrocker');
+  const [userLetters, setUserLetters]= useState ([]);
+  const [solutionLetters, setSolutionLetters] = useState([]); 
+
+
+  const renderSolutionLetters =()=>{
+    const wordLetters = word.split('');
+    return wordLetters.map ((eachLetter,index)=>{
+      if (userLetters.includes(eachLetter)){
+      setSolutionLetters ([...eachLetter])
+      return <li className="letter" key={index}>{eachLetter}</li>
+      } else {
+        return <li className="letter" key={index}></li>; 
+      }
+    })
+  }
 
   const handleChange =(event)=> {
     const letter = event.target.value;
     if(letter === event.target.value) {
-     setLastLetter(event.target.value.replace (/[^a-zA-Z\d]/ig, 'Error'));
-     if (letter === 'Error'){
-      lastLetter.classList.remove ('form__input')
-      lastLetter.classList.add ('message-error')
-     }
-
+     setLastLetter(event.target.value.replace (/[^a-zA-Z\d]/ig, '¿?'));
+     setSolutionLetters ([...solutionLetter])
     }
   }
 
@@ -38,16 +50,7 @@ function App() {
           <div className="solution">
             <h2 className="title">Solución:</h2>
             <ul className="letters">
-              <li className="letter">k</li>
-              <li className="letter">a</li>
-              <li className="letter"></li>
-              <li className="letter">a</li>
-              <li className="letter">k</li>
-              <li className="letter">r</li>
-              <li className="letter"></li>
-              <li className="letter">k</li>
-              <li className="letter">e</li>
-              <li className="letter">r</li>
+              {renderSolutionLetters()}
             </ul>
           </div>
           <div className="error">
